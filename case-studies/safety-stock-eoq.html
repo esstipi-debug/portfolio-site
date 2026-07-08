@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Right-Sizing Safety Stock, Reorder Points &amp; EOQ — [Your Name]</title>
+<meta name="description" content="Case study: worked EOQ and safety-stock models, end to end, grounded in Vandeput (2020).">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232f5fb0'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='60' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand placeholder" href="../index.html" title="Replace with your name">[Your Name]</a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#case-studies">Case Studies</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">&#9680;</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+    <a class="back-link" href="../index.html#case-studies">&larr; All case studies</a>
+  </div>
+
+  <header class="case-hero">
+    <div class="container">
+      <p class="case-kicker">Case Study &mdash; Safety Stock &amp; EOQ</p>
+      <h1>Right-Sizing Safety Stock, Reorder Points &amp; Order Quantities</h1>
+      <p class="case-summary">The two most common &mdash; and most often misapplied &mdash; inventory formulas, worked end to end from raw demand statistics to a defensible policy.</p>
+      <div class="case-image reveal">
+        <img src="../assets/img/dashboard-detail.png" width="1380" height="860" alt="Detail dashboard showing SKU-level inventory policy parameters" loading="eager">
+      </div>
+    </div>
+  </header>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>Problem</h2>
+      <p>Two questions come up on almost every inventory engagement: how much should I order at once, and how much buffer should I hold against demand variability? Get the order quantity wrong and you pay too much in ordering or holding costs; get the safety stock wrong and you either stock out or tie up working capital that didn't need to be there.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>Method</h2>
+      <p>The Economic Order Quantity (EOQ) model balances ordering cost against holding cost to find the order size that minimizes total annual cost (Vandeput 2020, &sect;2.2.4). Safety stock is sized from the standard deviation of demand and a target cycle service level, converted to a buffer via the service-level z-factor (Vandeput 2020, Table 4.1) &mdash; not a flat percentage of average demand, which is the most common mistake I see.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>What I built</h2>
+      <p>I ran both formulas end to end through Linchpin's <code>eoq</code> and <code>safety_stock</code> modules on a representative demand profile, then combined them into a reorder point: expected demand during lead time plus the safety-stock buffer.</p>
+    </div>
+  </section>
+
+  <section class="case-result">
+    <div class="container">
+      <h2>Result</h2>
+      <div class="stat-grid">
+        <div class="stat"><span class="stat-number">239</span><span class="stat-label">EOQ order quantity (units), D=1,000/yr, k=&euro;50/order, h=&euro;1.75/unit/yr</span></div>
+        <div class="stat"><span class="stat-number">&euro;418</span><span class="stat-label">Minimum total annual cost at that order quantity</span></div>
+        <div class="stat"><span class="stat-number">41</span><span class="stat-label">Safety stock (units), &mu;=100, &sigma;=25, 95% service level</span></div>
+        <div class="stat"><span class="stat-number">141</span><span class="stat-label">Resulting reorder point (units)</span></div>
+      </div>
+      <p class="case-note">Worked examples reproduced from Linchpin's engine (<code>src/eoq.py</code>, <code>src/safety_stock.py</code>) &mdash; every number here is reproducible with a two-line Python snippet in the repository's case-studies file.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>Tools</h2>
+      <ul class="tag-list">
+        <li class="tag">Python</li>
+        <li class="tag">EOQ Modeling</li>
+        <li class="tag">Safety Stock / Service Level Analysis</li>
+        <li class="tag">(s,Q) / (R,S) Policy Design</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="container">
+    <a class="btn btn-primary" href="../index.html#contact">Discuss a project like this &rarr;</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>&copy; <span id="year"></span> <span class="placeholder" title="Replace with your name">[Your Name]</span>. Built with Linchpin.</p>
+    <div class="footer-links">
+      <a href="https://github.com/esstipi-debug/linchpin" target="_blank" rel="noopener">GitHub</a>
+      <a class="placeholder" href="https://www.linkedin.com/in/your-profile" title="Replace with your LinkedIn URL" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="placeholder" href="https://www.upwork.com/freelancers/your-profile" title="Replace with your Upwork URL" target="_blank" rel="noopener">Upwork</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
