@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building an AI Agent for Supply-Chain Decisions — [Your Name]</title>
+<meta name="description" content="Case study: Linchpin, a QA-gated AI agent that runs 35+ supply-chain models end to end.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232f5fb0'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='60' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand placeholder" href="../index.html" title="Replace with your name">[Your Name]</a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#case-studies">Case Studies</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">&#9680;</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+    <a class="back-link" href="../index.html#case-studies">&larr; All case studies</a>
+  </div>
+
+  <header class="case-hero">
+    <div class="container">
+      <p class="case-kicker">Case Study &mdash; AI Agent</p>
+      <h1>Building an AI Agent for Supply-Chain Decisions</h1>
+      <p class="case-summary">Why I didn't stop at spreadsheets: a QA-gated agent that classifies a brief, runs the right model, and never leaves you with a dead end.</p>
+      <div class="case-image reveal">
+        <img src="../assets/img/scm-agent-console.png" width="1240" height="680" alt="Linchpin agent console routing a brief to a supply chain capability" loading="eager">
+      </div>
+    </div>
+  </header>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>Problem</h2>
+      <p>Most inventory analysis lives in one-off spreadsheets: fragile, unauditable, and slow to rerun the moment the data changes. Every new question means rebuilding the same formulas from scratch, and nothing stops a bad input from producing a confident-looking wrong answer.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>Method</h2>
+      <p>I built an orchestrator agent around the exact same pipeline for every capability: a plain-language brief is classified to intent, routed to one of 35+ registered tools, run, validated against a QA gate, and delivered as a finished Excel workbook, report, and chart. If QA fails, nothing ships &mdash; that check lives in one place, not scattered across each tool.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>What I built</h2>
+      <p>Two safety guarantees sit on top of the pipeline. <strong>Never-unprotected:</strong> every consequential result is either executed outright, or hands back ranked options, a prepared handoff (a pre-filled PO or count sheet), or an escalation with an SLA &mdash; never a dead end. <strong>Safe-staging writeback:</strong> any change to a client's live system of record (e.g. an Odoo ERP or an Excel workbook) is first staged as a dry-run changeset, classified by risk tier, gated behind a time-boxed approval, and applied idempotently with a working rollback.</p>
+    </div>
+  </section>
+
+  <section class="case-result">
+    <div class="container">
+      <h2>Result</h2>
+      <div class="stat-grid">
+        <div class="stat"><span class="stat-number">35+</span><span class="stat-label">Agent-routable supply-chain tools, one pipeline</span></div>
+        <div class="stat"><span class="stat-number">1,100+</span><span class="stat-label">Automated tests (engine vs. textbook numbers + agent + HTTP guards)</span></div>
+        <div class="stat"><span class="stat-number">24</span><span class="stat-label">SCM textbooks/papers grounding every model via a knowledge graph</span></div>
+        <div class="stat"><span class="stat-number">75 / 383s</span><span class="stat-label">Public datasets processed end to end, one benchmark run</span></div>
+      </div>
+      <p class="case-note">Linchpin is open source &mdash; browse the orchestrator, the full tool registry, and the test suite on GitHub.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>Tools</h2>
+      <ul class="tag-list">
+        <li class="tag">Python</li>
+        <li class="tag">FastAPI</li>
+        <li class="tag">Knowledge-Graph Retrieval</li>
+        <li class="tag">QA-Gated Pipeline Design</li>
+        <li class="tag">LLM-Assisted Routing (optional)</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="container">
+    <a class="btn btn-primary" href="https://github.com/esstipi-debug/linchpin" target="_blank" rel="noopener">View the repository &rarr;</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>&copy; <span id="year"></span> <span class="placeholder" title="Replace with your name">[Your Name]</span>. Built with Linchpin.</p>
+    <div class="footer-links">
+      <a href="https://github.com/esstipi-debug/linchpin" target="_blank" rel="noopener">GitHub</a>
+      <a class="placeholder" href="https://www.linkedin.com/in/your-profile" title="Replace with your LinkedIn URL" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="placeholder" href="https://www.upwork.com/freelancers/your-profile" title="Replace with your Upwork URL" target="_blank" rel="noopener">Upwork</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
