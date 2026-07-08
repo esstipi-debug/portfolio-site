@@ -19,7 +19,12 @@
 
   const themeToggle = document.getElementById('themeToggle');
   const root = document.documentElement;
-  const storedTheme = localStorage.getItem('theme');
+  let storedTheme = null;
+  try {
+    storedTheme = localStorage.getItem('theme');
+  } catch (e) {
+    storedTheme = null;
+  }
   if (storedTheme) root.setAttribute('data-theme', storedTheme);
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
@@ -27,7 +32,11 @@
         || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       const next = current === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
+      try {
+        localStorage.setItem('theme', next);
+      } catch (e) {
+        // ignore — theme still applied for this page view, just not persisted
+      }
     });
   }
 

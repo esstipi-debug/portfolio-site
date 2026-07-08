@@ -306,6 +306,9 @@ body {
   padding-block: var(--space-section);
   border-bottom: 1px solid var(--color-border);
 }
+#about, #skills, #case-studies, #certifications, #contact {
+  scroll-margin-top: 5rem;
+}
 .section:last-of-type { border-bottom: none; }
 .section-kicker {
   font-family: var(--font-mono);
@@ -474,15 +477,15 @@ body {
 .case-note { font-size: var(--text-sm); color: var(--color-text-muted); font-style: italic; margin-top: var(--space-3); }
 
 /* Motion */
-.reveal {
+html.js .reveal {
   opacity: 0;
   transform: translateY(16px);
   transition: opacity var(--duration-normal) var(--ease-out-expo), transform var(--duration-normal) var(--ease-out-expo);
 }
-.reveal.is-visible {
+html.js .reveal.is-visible {
   opacity: 1;
   transform: none;
 }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; }
+  html.js .reveal { opacity: 1; transform: none; }
 }
