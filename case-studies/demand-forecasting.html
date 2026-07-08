@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demand Forecasting &amp; Segmentation at Scale — [Your Name]</title>
+<meta name="description" content="Case study: classifying and forecasting 34,498 SKUs across 75 public retail datasets end to end with Linchpin.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232f5fb0'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='60' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand placeholder" href="../index.html" title="Replace with your name">[Your Name]</a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#case-studies">Case Studies</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">&#9680;</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+    <a class="back-link" href="../index.html#case-studies">&larr; All case studies</a>
+  </div>
+
+  <header class="case-hero">
+    <div class="container">
+      <p class="case-kicker">Case Study &mdash; Forecasting</p>
+      <h1>Demand Forecasting &amp; Segmentation at Scale</h1>
+      <p class="case-summary">Classifying and forecasting 34,498 SKUs across 75 public retail datasets, end to end, with no manual per-SKU tuning.</p>
+      <div class="case-image reveal">
+        <img src="../assets/img/dashboard-forecast.png" width="1380" height="860" alt="Forecast dashboard showing demand curves against policy levels" loading="eager">
+      </div>
+    </div>
+  </header>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>Problem</h2>
+      <p>Most retail and CPG SKUs don't have smooth, predictable demand. A large share of them are intermittent &mdash; long stretches of zero demand punctuated by occasional orders &mdash; which breaks naive forecasting methods like simple moving averages or plain exponential smoothing. Forecast the wrong way and every downstream decision (safety stock, reorder points, purchasing) inherits the error.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>Method</h2>
+      <p>Before forecasting a single SKU, classify it. Linchpin's engine runs ABC-XYZ segmentation to separate steady, high-volume SKUs from volatile or intermittent ones, then routes intermittent SKUs to Croston's method instead of a generic smoothing model &mdash; the demand-classification approach laid out in Vandeput (2020), Ch. 9.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>What I built</h2>
+      <p>I ran Linchpin's full <code>classify &rarr; forecast &rarr; inventory-policy</code> pipeline end to end against 75 public retail datasets &mdash; the M5 Forecasting competition (split by store and department), the UCI Online Retail dataset, and the Kaggle Superstore dataset &mdash; through the same agent pipeline used for every other capability, with no manual per-SKU tuning.</p>
+    </div>
+  </section>
+
+  <section class="case-result">
+    <div class="container">
+      <h2>Result</h2>
+      <div class="stat-grid">
+        <div class="stat"><span class="stat-number">75</span><span class="stat-label">Public datasets processed</span></div>
+        <div class="stat"><span class="stat-number">34,498</span><span class="stat-label">SKUs classified &amp; forecast</span></div>
+        <div class="stat"><span class="stat-number">$33.47M</span><span class="stat-label">Aggregate inventory value computed</span></div>
+        <div class="stat"><span class="stat-number">383s</span><span class="stat-label">Total end-to-end runtime</span></div>
+      </div>
+      <p class="case-note">Run against public benchmark datasets (M5 / UCI Online Retail / Superstore) via Linchpin's own portfolio benchmark script &mdash; not client data. The full dataset-by-dataset breakdown is reproducible from the Linchpin repository.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>Tools</h2>
+      <ul class="tag-list">
+        <li class="tag">Python</li>
+        <li class="tag">Pandas</li>
+        <li class="tag">ABC-XYZ Segmentation</li>
+        <li class="tag">Croston's Method</li>
+        <li class="tag">Linchpin Forecasting Engine</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="container">
+    <a class="btn btn-primary" href="../index.html#contact">Discuss a project like this &rarr;</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>&copy; <span id="year"></span> <span class="placeholder" title="Replace with your name">[Your Name]</span>. Built with Linchpin.</p>
+    <div class="footer-links">
+      <a href="https://github.com/esstipi-debug/linchpin" target="_blank" rel="noopener">GitHub</a>
+      <a class="placeholder" href="https://www.linkedin.com/in/your-profile" title="Replace with your LinkedIn URL" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="placeholder" href="https://www.upwork.com/freelancers/your-profile" title="Replace with your Upwork URL" target="_blank" rel="noopener">Upwork</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
