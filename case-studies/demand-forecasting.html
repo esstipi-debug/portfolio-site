@@ -85,6 +85,18 @@ try {
 
   <section class="case-section">
     <div class="container">
+      <h2>How this compares</h2>
+      <p>Backtested against real M5 competition data (100 SKUs, genuine held-out actuals): Linchpin's classification-routed forecast is about 19% more accurate than naive last-value persistence &mdash; the default most planners fall back to in a spreadsheet.</p>
+      <div class="stat-grid">
+        <div class="stat"><span class="stat-number">~19%</span><span class="stat-label">Lower forecast error vs. naive persistence (MAE and demand-weighted WAPE)</span></div>
+        <div class="stat"><span class="stat-number">99/100</span><span class="stat-label">Sampled SKUs correctly classified as intermittent, routed to Croston's method</span></div>
+      </div>
+      <p class="case-note">On one specific metric &mdash; the unweighted per-SKU-average WAPE &mdash; naive edges out Linchpin by 3.2 points, a known artifact of that metric on intermittent demand (it's why the real M5 competition itself doesn't score on plain per-series WAPE). Full breakdown, both metrics, and the exact reproducible command: <a href="https://github.com/esstipi-debug/linchpin/blob/main/case-studies/CASE_STUDIES.md" target="_blank" rel="noopener">CASE_STUDIES.md</a>, Exercise 10.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
       <h2>Tools</h2>
       <ul class="tag-list">
         <li class="tag">Python</li>
