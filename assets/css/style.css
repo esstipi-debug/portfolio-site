@@ -240,13 +240,19 @@ body {
   background: var(--color-accent);
   color: var(--color-accent-contrast);
 }
-.btn-primary:hover { transform: translateY(-1px); }
+.btn-primary:hover { transform: translateY(-1px); background: var(--color-accent-hover); }
 .btn-ghost {
   background: transparent;
   border-color: var(--color-border);
   color: var(--color-text);
 }
 .btn-ghost:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.btn-secondary {
+  background: var(--color-secondary);
+  color: var(--color-text);
+}
+.btn-secondary:hover { background: var(--color-secondary-hover); }
+.btn:active { transform: scale(0.97); }
 
 /* Hero */
 .hero {
