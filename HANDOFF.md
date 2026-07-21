@@ -9,9 +9,19 @@
 A freelance portfolio site for Inventory/SCM specialist work (Upwork-focused)
 is **built, reviewed, and locally verified** — 6 pages, real numbers only,
 nothing fabricated. Two supporting PRs are open on the Linchpin repo with
-**green CI**, not yet merged. **Nothing has been deployed or pushed to any
-remote for the portfolio site itself** — it only exists on the local branch
-`build-site` in this repo.
+**green CI**, not yet merged. A HeroUI-inspired button/card visual restyle
+(`docs/superpowers/specs/2026-07-21-heroui-inspired-button-card-restyle-design.md`)
+also landed since the previous version of this handoff — additive vanilla-CSS
+only, no React/build step adopted (see that spec for why).
+
+**`build-site` merged to `master` (fast-forward) and deleted; `master` pushed
+to a new public GitHub repo, https://github.com/esstipi-debug/portfolio-site**
+— the site is no longer local-only. **Not deployed to GitHub Pages yet** (that
+remains a separate, explicitly-gated step). **Placeholder content is still
+live and now publicly visible on GitHub** — `[Your Name]`, `you@example.com`,
+LinkedIn/Upwork URLs, etc. across all 6 pages (search `class="placeholder"` /
+`[PLACEHOLDER:`) — fill these in before pointing anyone at the repo or
+enabling Pages.
 
 **The very next planned step (not yet started): Phase 2 — translate the site
 into es/pt/zh/ja.** A design was proposed to the user (language-folder
@@ -23,9 +33,9 @@ written — confirm/re-propose it before writing any translated pages.
 
 ### 1. Portfolio site (this repo, `C:\Users\Gamer\Music\scm\portfolio-site`)
 
-- Branch `build-site` (local only — **no GitHub remote exists for this repo
-  yet**, `git remote -v` is empty). Never merged to `master`, never pushed,
-  never deployed.
+- Now on `master` (`build-site` was merged in fast-forward and deleted).
+  Remote: `origin` → https://github.com/esstipi-debug/portfolio-site (public).
+  Pushed. **Not deployed to GitHub Pages yet** — separate, explicitly-gated step.
 - 6 HTML pages, all cross-verified in-browser (zero console errors, zero
   failed requests, no overflow at 320/768/1024/1440px), Swiss/data-forward
   design system, light+dark mode, `prefers-reduced-motion` respected:
