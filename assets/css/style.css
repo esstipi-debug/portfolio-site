@@ -57,6 +57,15 @@ code { font-family: var(--font-mono); }
   --duration-normal: 300ms;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --container-max: 1180px;
+
+  --color-accent-hover: color-mix(in oklch, var(--color-accent) 88%, black);
+  --color-accent-soft: color-mix(in oklch, var(--color-accent) 15%, transparent);
+  --color-secondary: var(--color-bg-alt);
+  --color-secondary-hover: color-mix(in oklch, var(--color-bg-alt) 92%, var(--color-text) 8%);
+  --shadow-card-2:
+    0 1px 2px oklch(0% 0 0 / 0.04),
+    0 4px 10px oklch(0% 0 0 / 0.05),
+    0 12px 28px oklch(0% 0 0 / 0.07);
 }
 
 :root[data-theme="dark"] {
@@ -70,6 +79,11 @@ code { font-family: var(--font-mono); }
   --color-accent-contrast: oklch(15% 0 0);
   --color-placeholder: oklch(75% 0.14 50);
   --shadow-card: 0 1px 2px oklch(0% 0 0 / 0.3), 0 8px 24px oklch(0% 0 0 / 0.35);
+  --color-accent-hover: color-mix(in oklch, var(--color-accent) 88%, white);
+  --shadow-card-2:
+    0 1px 2px oklch(0% 0 0 / 0.3),
+    0 4px 10px oklch(0% 0 0 / 0.32),
+    0 12px 28px oklch(0% 0 0 / 0.38);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -84,6 +98,11 @@ code { font-family: var(--font-mono); }
     --color-accent-contrast: oklch(15% 0 0);
     --color-placeholder: oklch(75% 0.14 50);
     --shadow-card: 0 1px 2px oklch(0% 0 0 / 0.3), 0 8px 24px oklch(0% 0 0 / 0.35);
+    --color-accent-hover: color-mix(in oklch, var(--color-accent) 88%, white);
+    --shadow-card-2:
+      0 1px 2px oklch(0% 0 0 / 0.3),
+      0 4px 10px oklch(0% 0 0 / 0.32),
+      0 12px 28px oklch(0% 0 0 / 0.38);
   }
 }
 
