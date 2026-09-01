@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demand Forecasting &amp; Segmentation at Scale — [Your Name]</title>
-<meta name="description" content="Case study: classifying and forecasting 34,498 SKUs across 75 public retail datasets end to end with Linchpin.">
+<title>Demand Forecasting &amp; Segmentation at Scale — Marcos Stipicich</title>
+<meta name="description" content="Case study: classifying and forecasting 34,498 SKUs across 75 public retail datasets end to end with Kern.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232f5fb0'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='60' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="../assets/css/style.css">
 <script>
@@ -19,7 +19,7 @@ try {
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="container nav">
-    <a class="brand placeholder" href="../index.html" title="Replace with your name">[Your Name]</a>
+    <a class="brand" href="../index.html">Marcos Stipicich</a>
     <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">
       <span></span><span></span><span></span>
     </button>
@@ -59,14 +59,14 @@ try {
   <section class="case-section">
     <div class="container">
       <h2>Method</h2>
-      <p>Before forecasting a single SKU, classify it. Linchpin's engine runs ABC-XYZ segmentation to separate steady, high-volume SKUs from volatile or intermittent ones, then routes intermittent SKUs to Croston's method instead of a generic smoothing model &mdash; the demand-classification approach laid out in Vandeput (2020), Ch. 9.</p>
+      <p>Before forecasting a single SKU, classify it. Kern's engine runs ABC-XYZ segmentation to separate steady, high-volume SKUs from volatile or intermittent ones, then routes intermittent SKUs to Croston's method instead of a generic smoothing model &mdash; the demand-classification approach laid out in Vandeput (2020), Ch. 9.</p>
     </div>
   </section>
 
   <section class="case-section">
     <div class="container">
       <h2>What I built</h2>
-      <p>I ran Linchpin's full <code>classify &rarr; forecast &rarr; inventory-policy</code> pipeline end to end against 75 public retail datasets &mdash; the M5 Forecasting competition (split by store and department), the UCI Online Retail dataset, and the Kaggle Superstore dataset &mdash; through the same agent pipeline used for every other capability, with no manual per-SKU tuning.</p>
+      <p>I ran Kern's full <code>classify &rarr; forecast &rarr; inventory-policy</code> pipeline end to end against 75 public retail datasets &mdash; the M5 Forecasting competition (split by store and department), the UCI Online Retail dataset, and the Kaggle Superstore dataset &mdash; through the same agent pipeline used for every other capability, with no manual per-SKU tuning.</p>
     </div>
   </section>
 
@@ -79,19 +79,19 @@ try {
         <div class="stat"><span class="stat-number">$33.47M</span><span class="stat-label">Aggregate inventory value computed</span></div>
         <div class="stat"><span class="stat-number">383s</span><span class="stat-label">Total end-to-end runtime</span></div>
       </div>
-      <p class="case-note">Run against public benchmark datasets (M5 / UCI Online Retail / Superstore) via Linchpin's own portfolio benchmark script &mdash; not client data. The full dataset-by-dataset breakdown is reproducible from the Linchpin repository.</p>
+      <p class="case-note">Run against public benchmark datasets (M5 / UCI Online Retail / Superstore) via Kern's own portfolio benchmark script &mdash; not client data. The full dataset-by-dataset breakdown is reproducible from the Kern repository.</p>
     </div>
   </section>
 
   <section class="case-section">
     <div class="container">
       <h2>How this compares</h2>
-      <p>Backtested against real M5 competition data (100 SKUs, genuine held-out actuals): Linchpin's classification-routed forecast is about 19% more accurate than naive last-value persistence &mdash; the default most planners fall back to in a spreadsheet.</p>
+      <p>Backtested against real M5 competition data (100 SKUs, genuine held-out actuals): Kern's classification-routed forecast is about 19% more accurate than naive last-value persistence &mdash; the default most planners fall back to in a spreadsheet.</p>
       <div class="stat-grid">
         <div class="stat"><span class="stat-number">~19%</span><span class="stat-label">Lower forecast error vs. naive persistence (MAE and demand-weighted WAPE)</span></div>
         <div class="stat"><span class="stat-number">99/100</span><span class="stat-label">Sampled SKUs correctly classified as intermittent, routed to Croston's method</span></div>
       </div>
-      <p class="case-note">On one specific metric &mdash; the unweighted per-SKU-average WAPE &mdash; naive edges out Linchpin by 3.2 points, a known artifact of that metric on intermittent demand (it's why the real M5 competition itself doesn't score on plain per-series WAPE). Full breakdown, both metrics, and the exact reproducible command: <a href="https://github.com/esstipi-debug/linchpin/blob/main/case-studies/CASE_STUDIES.md" target="_blank" rel="noopener">CASE_STUDIES.md</a>, Exercise 10.</p>
+      <p class="case-note">On one specific metric &mdash; the unweighted per-SKU-average WAPE &mdash; naive edges out Kern by 3.2 points, a known artifact of that metric on intermittent demand (it's why the real M5 competition itself doesn't score on plain per-series WAPE). Full breakdown, both metrics, and the exact reproducible command: <a href="https://linchpin.fly.dev/how-it-works" target="_blank" rel="noopener">CASE_STUDIES.md</a>, Exercise 10.</p>
     </div>
   </section>
 
@@ -103,7 +103,7 @@ try {
         <li class="tag">Pandas</li>
         <li class="tag">ABC-XYZ Segmentation</li>
         <li class="tag">Croston's Method</li>
-        <li class="tag">Linchpin Forecasting Engine</li>
+        <li class="tag">Kern Forecasting Engine</li>
       </ul>
     </div>
   </section>
@@ -115,11 +115,11 @@ try {
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>&copy; <span id="year"></span> <span class="placeholder" title="Replace with your name">[Your Name]</span>. Built with Linchpin.</p>
+    <p>&copy; <span id="year"></span> <span>Marcos Stipicich</span>. Built with Kern.</p>
     <div class="footer-links">
-      <a href="https://github.com/esstipi-debug/linchpin" target="_blank" rel="noopener">GitHub</a>
-      <a class="placeholder" href="https://www.linkedin.com/in/your-profile" title="Replace with your LinkedIn URL" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="placeholder" href="https://www.upwork.com/freelancers/your-profile" title="Replace with your Upwork URL" target="_blank" rel="noopener">Upwork</a>
+      <a href="https://linchpin.fly.dev" target="_blank" rel="noopener">Live app</a>
+      <a href="https://www.linkedin.com/in/marcos-stipicich" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.upwork.com/freelancers/~014166c91202da1f21" target="_blank" rel="noopener">Upwork</a>
     </div>
   </div>
 </footer>

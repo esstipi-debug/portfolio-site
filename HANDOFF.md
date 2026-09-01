@@ -18,8 +18,8 @@ only, no React/build step adopted (see that spec for why).
 to a new public GitHub repo, https://github.com/esstipi-debug/portfolio-site**
 — the site is no longer local-only. **Not deployed to GitHub Pages yet** (that
 remains a separate, explicitly-gated step). **Placeholder content is still
-live and now publicly visible on GitHub** — `[Your Name]`, `you@example.com`,
-LinkedIn/Upwork URLs, etc. across all 6 pages (search `class="placeholder"` /
+live and now publicly visible on GitHub** — `Marcos Stipicich`, `marcos.stipicic@gmail.com`,
+LinkedIn/Upwork URLs, etc. across all 6 pages (search `class=""` /
 `[PLACEHOLDER:`) — fill these in before pointing anyone at the repo or
 enabling Pages.
 
@@ -53,7 +53,7 @@ written — confirm/re-propose it before writing any translated pages.
 - Every page still has live `[PLACEHOLDER: ...]` / `.placeholder`-marked
   content (name, bio, years of experience, email, LinkedIn/Upwork URLs,
   certifications) — **the user has not filled these in yet.** Search for
-  `class="placeholder"` across all HTML files before publishing.
+  `class=""` across all HTML files before publishing.
 - Design spec: `docs/superpowers/specs/2026-07-08-portfolio-site-design.md`
 - Implementation plan: `docs/superpowers/plans/2026-07-08-portfolio-site.md`
 - Built via `superpowers:subagent-driven-development` (10 tasks, each

@@ -1,6 +1,6 @@
 # Upwork Profile Content
 
-Copy-paste source for your Upwork profile. Replace every `[PLACEHOLDER: ...]`
+Copy-paste source for your Upwork profile. All placeholders are filled in
 before publishing.
 
 ## Profile title (one line)
@@ -9,7 +9,7 @@ Inventory & Supply Chain Optimization Specialist | Demand Forecasting, Safety St
 
 ## Overview / bio
 
-[PLACEHOLDER: 1-2 sentence opener about your background — role, years of experience, industries]
+Thirteen years in inventory, demand planning and distribution centre operations across Chile, Argentina and Australia, most recently on the operations side of a WMS cutover on a 50,000-SKU distribution centre in Melbourne.
 
 I work on the inventory and demand-planning problems that decide whether a business is stocked out or drowning in working capital:
 
@@ -18,9 +18,9 @@ I work on the inventory and demand-planning problems that decide whether a busin
 - **EOQ & order policies** — (s,Q) and (R,S) — balancing ordering cost against holding cost
 - **Multi-echelon network design** — placing safety stock where it's cheapest across a supply chain, using the Guaranteed-Service Model
 
-Every model I use is grounded in the field's established literature (Vandeput, Silver-Pyke-Peterson, and others) — I don't eyeball it. To prove it, I built **Linchpin**, an open-source AI agent that runs 35+ of these models end to end, QA-gated, from a plain-language brief. You can see it work in my portfolio.
+Every model I use is grounded in the field's established literature (Vandeput, Silver-Pyke-Peterson, and others) — I don't eyeball it. To prove it, I built **Kern**, an AI agent that runs 50 of these models end to end, QA-gated, from a plain-language brief. It is live and you can open it: https://linchpin.fly.dev
 
-[PLACEHOLDER: education, certifications, or a closing line about availability/rates]
+BBA in Logistics (Duoc UC, Chile) and a Graduate Certificate in Supply Chain and Logistics Management (RMIT Melbourne). ASCM CSCP, certification lapsed 2023. Available 30+ hours a week.
 
 ## Skills (tags)
 
@@ -30,16 +30,16 @@ Inventory Optimization, Demand Forecasting, Safety Stock, EOQ, Reorder Point Opt
 
 ### 1. Demand Forecasting & Segmentation at Scale
 Classified and forecast 34,498 SKUs across 75 public retail datasets (M5 competition, UCI Online Retail, Superstore) end to end, using demand-driven segmentation and Croston's method for intermittent demand.
-Link: [PLACEHOLDER: your-site-url]/case-studies/demand-forecasting.html
+Link: https://linchpin.fly.dev/case-studies/demand-forecasting.html
 
 ### 2. Right-Sizing Safety Stock, Reorder Points & Order Quantities
 Worked EOQ and safety-stock models end to end from raw demand statistics to a reorder policy at a target service level, grounded in Vandeput (2020).
-Link: [PLACEHOLDER: your-site-url]/case-studies/safety-stock-eoq.html
+Link: https://linchpin.fly.dev/case-studies/safety-stock-eoq.html
 
 ### 3. Multi-Echelon Network Optimization
 Applied the Guaranteed-Service Model to a 3-stage supply chain to find where in the network to hold safety stock at minimum cost while meeting a 95% service level.
-Link: [PLACEHOLDER: your-site-url]/case-studies/multi-echelon-network.html
+Link: https://linchpin.fly.dev/case-studies/multi-echelon-network.html
 
 ### 4. Building an AI Agent for Supply-Chain Decisions
-Built Linchpin, an open-source orchestrator agent that classifies a plain-language brief, runs the right model from a registry of 35+, validates it, and delivers a finished Excel/report — QA-gated, with a safe-staging writeback guarantee for any live system it touches.
-Link: [PLACEHOLDER: your-site-url]/case-studies/ai-decision-agent.html
+Built Kern, an orchestrator agent that classifies a plain-language brief, runs the right model from a registry of 50, validates it, and delivers a finished Excel/report — QA-gated, with a safe-staging writeback guarantee for any live system it touches.
+Link: https://linchpin.fly.dev/case-studies/ai-decision-agent.html
