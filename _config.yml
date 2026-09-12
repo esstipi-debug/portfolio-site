@@ -1,0 +1,8 @@
+# GitHub Pages (Jekyll) — keep working documents out of the published site.
+# The repo stays public; these files simply are not served from the portfolio URL.
+exclude:
+  - HANDOFF.md
+  - README.md
+  - docs/
+  - upwork/
+  - .claude/
