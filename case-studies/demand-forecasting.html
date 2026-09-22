@@ -76,10 +76,10 @@ try {
       <div class="stat-grid">
         <div class="stat"><span class="stat-number">75</span><span class="stat-label">Public datasets processed</span></div>
         <div class="stat"><span class="stat-number">34,498</span><span class="stat-label">SKUs classified &amp; forecast</span></div>
-        <div class="stat"><span class="stat-number">$33.47M</span><span class="stat-label">Aggregate inventory value computed</span></div>
+        <div class="stat"><span class="stat-number">3</span><span class="stat-label">Public data sources: M5, UCI Online Retail, Superstore</span></div>
         <div class="stat"><span class="stat-number">383s</span><span class="stat-label">Total end-to-end runtime</span></div>
       </div>
-      <p class="case-note">Run against public benchmark datasets (M5 / UCI Online Retail / Superstore) via Kern's own portfolio benchmark script &mdash; not client data. The full dataset-by-dataset breakdown is reproducible from the Kern repository.</p>
+      <p class="case-note">Run against public benchmark datasets (M5 / UCI Online Retail / Superstore) via Kern's own portfolio benchmark script &mdash; not client data. The dataset-by-dataset breakdown is available on request; the repository is private.</p>
     </div>
   </section>
 
@@ -89,9 +89,9 @@ try {
       <p>Backtested against real M5 competition data (100 SKUs, genuine held-out actuals): Kern's classification-routed forecast is about 19% more accurate than naive last-value persistence &mdash; the default most planners fall back to in a spreadsheet.</p>
       <div class="stat-grid">
         <div class="stat"><span class="stat-number">~19%</span><span class="stat-label">Lower forecast error vs. naive persistence (MAE and demand-weighted WAPE)</span></div>
-        <div class="stat"><span class="stat-number">99/100</span><span class="stat-label">Sampled SKUs correctly classified as intermittent, routed to Croston's method</span></div>
+        <div class="stat"><span class="stat-number">99/100</span><span class="stat-label">Sampled SKUs classified as intermittent and routed to Croston's method</span></div>
       </div>
-      <p class="case-note">On one specific metric &mdash; the unweighted per-SKU-average WAPE &mdash; naive edges out Kern by 3.2 points, a known artifact of that metric on intermittent demand (it's why the real M5 competition itself doesn't score on plain per-series WAPE). Full breakdown, both metrics, and the exact reproducible command: <a href="https://linchpin.fly.dev/how-it-works" target="_blank" rel="noopener">CASE_STUDIES.md</a>, Exercise 10.</p>
+      <p class="case-note">On one specific metric &mdash; the unweighted per-SKU-average WAPE &mdash; naive edges out Kern by 3.2 points, a known artifact of that metric on intermittent demand (it's why the real M5 competition itself doesn't score on plain per-series WAPE). Both metrics, SKU by SKU, are available on request.</p>
     </div>
   </section>
 

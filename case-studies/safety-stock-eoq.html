@@ -79,7 +79,7 @@ try {
         <div class="stat"><span class="stat-number">41</span><span class="stat-label">Safety stock (units), &mu;=100, &sigma;=25, 95% service level</span></div>
         <div class="stat"><span class="stat-number">141</span><span class="stat-label">Resulting reorder point (units)</span></div>
       </div>
-      <p class="case-note">Worked examples reproduced from Kern's engine (<code>src/eoq.py</code>, <code>src/safety_stock.py</code>) &mdash; every number here is reproducible with a two-line Python snippet in the repository's case-studies file.</p>
+      <p class="case-note">Worked examples reproduced from Kern's engine (<code>src/eoq.py</code>, <code>src/safety_stock.py</code>) &mdash; and the arithmetic can be checked with a calculator: EOQ = &radic;(2 &times; 1,000 &times; 50 / 1.75) = 239, and safety stock = 1.65 &times; 25 = 41.</p>
     </div>
   </section>
 
@@ -91,7 +91,7 @@ try {
         <div class="stat"><span class="stat-number">79%</span><span class="stat-label">Service level actually achieved by the common "20% of demand" safety-stock rule of thumb &mdash; against a 95% target</span></div>
         <div class="stat"><span class="stat-number">29%</span><span class="stat-label">More expensive per year from ordering a round lot of 500 instead of the EOQ-optimal 239 units</span></div>
       </div>
-      <p class="case-note">Both are real, reproducible outputs of the engine, not illustrations &mdash; see <a href="https://linchpin.fly.dev/how-it-works" target="_blank" rel="noopener">CASE_STUDIES.md</a>, Exercises 7 and 8.</p>
+      <p class="case-note">Both are real outputs of the engine, not illustrations, and both can be checked by hand from the scenario above: 20 units of buffer is a z of 0.8, and a lot of 500 costs &euro;538 a year against &euro;418.</p>
     </div>
   </section>
 
