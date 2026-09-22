@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Right-Sizing Safety Stock, Reorder Points &amp; EOQ — Marcos Stipicich</title>
-<meta name="description" content="Case study: worked EOQ and safety-stock models, end to end, grounded in Vandeput (2020).">
+<title>How to calculate safety stock, reorder point and EOQ — Marcos Stipicich</title>
+<meta name="description" content="Size safety stock from demand variability and a service-level z, not a percentage of demand. The 20% rule delivers 79% service against a 95% target.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232f5fb0'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='60' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="../assets/css/style.css">
 <script>
@@ -13,6 +13,37 @@ try {
   var t = localStorage.getItem('theme');
   if (t) document.documentElement.setAttribute('data-theme', t);
 } catch (e) {}
+</script>
+<link rel="canonical" href="https://marcos-stipicich.fly.dev/case-studies/safety-stock-eoq.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Marcos Stipicich",
+  "jobTitle": "Inventory and supply chain specialist",
+  "url": "https://marcos-stipicich.fly.dev/",
+  "sameAs": [
+    "https://www.linkedin.com/in/marcos-stipicich",
+    "https://github.com/esstipi-debug",
+    "https://www.upwork.com/freelancers/~014166c91202da1f21"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do you calculate safety stock, reorder point and EOQ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Safety stock is z times the standard deviation of demand over the lead time, where z comes from the service level you choose: 1.65 for 95%. The reorder point is expected demand over the lead time plus that buffer. EOQ is the square root of 2DK/h — the order size where ordering cost and holding cost balance. The mistake to avoid is sizing safety stock as a flat percentage of demand."
+      }
+    }
+  ]
+}
 </script>
 </head>
 <body>
@@ -41,57 +72,54 @@ try {
   <header class="case-hero">
     <div class="container">
       <p class="case-kicker">Case Study &mdash; Safety Stock &amp; EOQ</p>
-      <h1>Right-Sizing Safety Stock, Reorder Points &amp; Order Quantities</h1>
-      <p class="case-summary">The two most common &mdash; and most often misapplied &mdash; inventory formulas, worked end to end from raw demand statistics to a defensible policy.</p>
+      <h1>How do you calculate safety stock, reorder point and EOQ?</h1>
+      <p class="case-summary">Safety stock is z times the standard deviation of demand over the lead time, where z comes from the service level you choose: 1.65 for 95%. The reorder point is expected demand over the lead time plus that buffer. EOQ is the square root of 2DK/h — the order size where ordering cost and holding cost balance. The mistake to avoid is sizing safety stock as a flat percentage of demand.</p>
       <div class="case-image reveal">
         <img src="../assets/img/dashboard-detail.png" width="1380" height="860" alt="Detail dashboard showing SKU-level inventory policy parameters" loading="eager">
       </div>
     </div>
   </header>
 
-  <section class="case-section">
-    <div class="container">
-      <h2>Problem</h2>
-      <p>Two questions come up on almost every inventory engagement: how much should I order at once, and how much buffer should I hold against demand variability? Get the order quantity wrong and you pay too much in ordering or holding costs; get the safety stock wrong and you either stock out or tie up working capital that didn't need to be there.</p>
-    </div>
-  </section>
-
-  <section class="case-section">
-    <div class="container">
-      <h2>Method</h2>
-      <p>The Economic Order Quantity (EOQ) model balances ordering cost against holding cost to find the order size that minimizes total annual cost (Vandeput 2020, &sect;2.2.4). Safety stock is sized from the standard deviation of demand and a target cycle service level, converted to a buffer via the service-level z-factor (Vandeput 2020, Table 4.1) &mdash; not a flat percentage of average demand, which is the most common mistake I see.</p>
-    </div>
-  </section>
-
-  <section class="case-section">
-    <div class="container">
-      <h2>What I built</h2>
-      <p>I ran both formulas end to end through Kern's <code>eoq</code> and <code>safety_stock</code> modules on a representative demand profile, then combined them into a reorder point: expected demand during lead time plus the safety-stock buffer.</p>
-    </div>
-  </section>
-
   <section class="case-result">
     <div class="container">
-      <h2>Result</h2>
+      <h2>Worked example</h2>
+      <p>Demand over the lead time averages 100 units, with a standard deviation of 25. The target is a 95% cycle service level, so z = 1.65. Annual demand is 1,000 units, each order costs &euro;50 to place, and holding one unit for a year costs &euro;1.75.</p>
       <div class="stat-grid">
-        <div class="stat"><span class="stat-number">239</span><span class="stat-label">EOQ order quantity (units), D=1,000/yr, k=&euro;50/order, h=&euro;1.75/unit/yr</span></div>
-        <div class="stat"><span class="stat-number">&euro;418</span><span class="stat-label">Minimum total annual cost at that order quantity</span></div>
-        <div class="stat"><span class="stat-number">41</span><span class="stat-label">Safety stock (units), &mu;=100, &sigma;=25, 95% service level</span></div>
-        <div class="stat"><span class="stat-number">141</span><span class="stat-label">Resulting reorder point (units)</span></div>
+        <div class="stat"><span class="stat-number">41</span><span class="stat-label">Safety stock (units): demand over the lead time &mu;=100, &sigma;=25, 95% service level</span></div>
+        <div class="stat"><span class="stat-number">141</span><span class="stat-label">Reorder point (units): 100 + 41</span></div>
+        <div class="stat"><span class="stat-number">239</span><span class="stat-label">EOQ (units): D=1,000/yr, K=&euro;50/order, h=&euro;1.75/unit/yr</span></div>
+        <div class="stat"><span class="stat-number">&euro;418</span><span class="stat-label">Ordering plus holding cost per year at that quantity</span></div>
       </div>
-      <p class="case-note">Worked examples reproduced from Kern's engine (<code>src/eoq.py</code>, <code>src/safety_stock.py</code>) &mdash; every number here is reproducible with a two-line Python snippet in the repository's case-studies file.</p>
+      <p class="case-note">Safety stock = 1.65 &times; 25 = 41. Reorder point = 100 + 41 = 141. EOQ = &radic;(2 &times; 1,000 &times; 50 / 1.75) = 239. Every number on this page can be checked with a calculator.</p>
     </div>
   </section>
 
   <section class="case-section">
     <div class="container">
-      <h2>How this compares</h2>
-      <p>Two common shortcuts, measured against the exact same scenario as the worked example above.</p>
+      <h2>What the shortcuts cost</h2>
+      <p>Same scenario, two shortcuts people actually use.</p>
       <div class="stat-grid">
-        <div class="stat"><span class="stat-number">79%</span><span class="stat-label">Service level actually achieved by the common "20% of demand" safety-stock rule of thumb &mdash; against a 95% target</span></div>
-        <div class="stat"><span class="stat-number">29%</span><span class="stat-label">More expensive per year from ordering a round lot of 500 instead of the EOQ-optimal 239 units</span></div>
+        <div class="stat"><span class="stat-number">79%</span><span class="stat-label">Service level actually delivered by the &ldquo;20% of demand&rdquo; rule, against a 95% target</span></div>
+        <div class="stat"><span class="stat-number">29%</span><span class="stat-label">More per year from ordering a round lot of 500 instead of 239</span></div>
       </div>
-      <p class="case-note">Both are real, reproducible outputs of the engine, not illustrations &mdash; see <a href="https://linchpin.fly.dev/how-it-works" target="_blank" rel="noopener">CASE_STUDIES.md</a>, Exercises 7 and 8.</p>
+      <p class="case-note">&ldquo;Safety stock = 20% of demand&rdquo; gives 20 units. That is a z of 0.8, which is a 79% service level &mdash; you think you are covered in 19 cycles out of 20, and you are covered in about 16. A lot of 500 costs &euro;538 a year instead of &euro;418, every year, for a number chosen because it was round.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>Where this doesn&rsquo;t work</h2>
+      <strong>When the lead time varies.</strong> The formula above assumes the supplier is punctual. When the lead time swings, the buffer needs a second term &mdash; average demand squared times the lead time variance &mdash; and on most SKUs that term is larger than the demand term.
+      <strong>On intermittent demand.</strong> The standard deviation of a series that is mostly zeros misrepresents the risk. Use a policy built for it.
+      <strong>When there is an MOQ or a quantity discount.</strong> EOQ assumes neither. With a minimum above the EOQ, compare total cost at both quantities and take that number to the supplier.
+      <p>And the service level here is cycle service level &mdash; the chance of not running out in a cycle. It is not fill rate, which is usually the number people mean.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>How it&rsquo;s built</h2>
+      <p>Both formulas run through Kern&rsquo;s <code>eoq</code> and <code>safety_stock</code> modules. The figures are the engine&rsquo;s output on exercises from Vandeput (2020), &sect;2.2.4 and Table 4.1, and the arithmetic is shown above so it can be checked without access to the code.</p>
     </div>
   </section>
 
@@ -108,7 +136,7 @@ try {
   </section>
 
   <div class="container">
-    <a class="btn btn-primary" href="../index.html#contact">Discuss a project like this &rarr;</a>
+    <a class="btn btn-primary" href="../index.html#contact">Talk about your inventory policy &rarr;</a>
   </div>
 </main>
 

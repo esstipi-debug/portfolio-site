@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Building an AI Agent for Supply-Chain Decisions — Marcos Stipicich</title>
-<meta name="description" content="Case study: Kern, a QA-gated AI agent that runs 35+ supply-chain models end to end.">
+<title>What should AI be allowed to decide in inventory planning? — Marcos Stipicich</title>
+<meta name="description" content="Not the numbers. In Kern the model breaks routing ties and polishes one sentence; every quantity comes from deterministic code, checked before it ships.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232f5fb0'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='60' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="../assets/css/style.css">
 <script>
@@ -13,6 +13,37 @@ try {
   var t = localStorage.getItem('theme');
   if (t) document.documentElement.setAttribute('data-theme', t);
 } catch (e) {}
+</script>
+<link rel="canonical" href="https://marcos-stipicich.fly.dev/case-studies/ai-decision-agent.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Marcos Stipicich",
+  "jobTitle": "Inventory and supply chain specialist",
+  "url": "https://marcos-stipicich.fly.dev/",
+  "sameAs": [
+    "https://www.linkedin.com/in/marcos-stipicich",
+    "https://github.com/esstipi-debug",
+    "https://www.upwork.com/freelancers/~014166c91202da1f21"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What should an AI be allowed to decide in inventory planning?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not the numbers. A language model is good at reading a plain-language request and bad at being accountable for a reorder quantity. In the system I built, the model does three narrow things — breaks a tie when a request is ambiguous, reads a document into a fixed schema, and rewrites one summary sentence. Every number in every deliverable comes from deterministic code and passes a QA gate before anything ships. Take the model away and the whole pipeline still runs."
+      }
+    }
+  ]
+}
 </script>
 </head>
 <body>
@@ -40,9 +71,9 @@ try {
 
   <header class="case-hero">
     <div class="container">
-      <p class="case-kicker">Case Study &mdash; AI Agent</p>
-      <h1>Building an AI Agent for Supply-Chain Decisions</h1>
-      <p class="case-summary">Why I didn't stop at spreadsheets: a QA-gated agent that classifies a brief, runs the right model, and never leaves you with a dead end.</p>
+      <p class="case-kicker">Case Study &mdash; AI &amp; Decisions</p>
+      <h1>What should an AI be allowed to decide in inventory planning?</h1>
+      <p class="case-summary">Not the numbers. A language model is good at reading a plain-language request and bad at being accountable for a reorder quantity. In the system I built, the model does three narrow things — breaks a tie when a request is ambiguous, reads a document into a fixed schema, and rewrites one summary sentence. Every number in every deliverable comes from deterministic code and passes a QA gate before anything ships. Take the model away and the whole pipeline still runs.</p>
       <div class="case-image reveal">
         <img src="../assets/img/scm-agent-console.png" width="1240" height="680" alt="Kern agent console routing a brief to a supply chain capability" loading="eager">
       </div>
@@ -51,32 +82,28 @@ try {
 
   <section class="case-section">
     <div class="container">
-      <h2>Problem</h2>
-      <p>Most inventory analysis lives in one-off spreadsheets: fragile, unauditable, and slow to rerun the moment the data changes. Every new question means rebuilding the same formulas from scratch, and nothing stops a bad input from producing a confident-looking wrong answer.</p>
+      <h2>How a request moves</h2>
+      <p>A request is matched against a registry of 50 tools by keyword first. The model is consulted only when that match is ambiguous, and its answer is discarded unless it names a tool that actually exists.</p>
+      <p>The chosen tool runs through the same prepare &rarr; run &rarr; QA &rarr; deliver pipeline as every other one. If QA fails, nothing is delivered. That check lives in one place, not inside each tool.</p>
+      <p>Citations come from a 3,019-node knowledge graph built from the supply chain literature. A citation that does not hold up against the graph is vetoed rather than shown.</p>
     </div>
   </section>
 
   <section class="case-section">
     <div class="container">
-      <h2>Method</h2>
-      <p>I built an orchestrator agent around the exact same pipeline for every capability: a plain-language brief is classified to intent, routed to one of 35+ registered tools, run, validated against a QA gate, and delivered as a finished Excel workbook, report, and chart. If QA fails, nothing ships &mdash; that check lives in one place, not scattered across each tool.</p>
-    </div>
-  </section>
-
-  <section class="case-section">
-    <div class="container">
-      <h2>What I built</h2>
-      <p>Two safety guarantees sit on top of the pipeline. <strong>Never-unprotected:</strong> every consequential result is either executed outright, or hands back ranked options, a prepared handoff (a pre-filled PO or count sheet), or an escalation with an SLA &mdash; never a dead end. <strong>Safe-staging writeback:</strong> any change to a client's live system of record (e.g. an Odoo ERP or an Excel workbook) is first staged as a dry-run changeset, classified by risk tier, gated behind a time-boxed approval, and applied idempotently with a working rollback.</p>
+      <h2>Two guarantees</h2>
+      <strong>Never a dead end.</strong> Every consequential result ends one of four ways: executed, ranked options, a prepared handoff such as a pre-filled purchase order or count sheet, or an escalation.
+      <strong>Nothing written without approval.</strong> A change to a system of record &mdash; an Odoo ERP, a Shopify store &mdash; is staged as a dry-run changeset, classified by risk, and held for time-boxed human approval, with idempotent apply and rollback. Those write paths are built and tested against in-memory stand-ins. The deployed version is read-only by design, and none of them has been run against a client&rsquo;s live system.
     </div>
   </section>
 
   <section class="case-result">
     <div class="container">
-      <h2>Result</h2>
+      <h2>By the numbers</h2>
       <div class="stat-grid">
-        <div class="stat"><span class="stat-number">35+</span><span class="stat-label">Agent-routable supply-chain tools, one pipeline</span></div>
-        <div class="stat"><span class="stat-number">1,100+</span><span class="stat-label">Automated tests (engine vs. textbook numbers + agent + HTTP guards)</span></div>
-        <div class="stat"><span class="stat-number">24</span><span class="stat-label">SCM textbooks/papers grounding every model via a knowledge graph</span></div>
+        <div class="stat"><span class="stat-number">50</span><span class="stat-label">Registered supply-chain tools, one pipeline</span></div>
+        <div class="stat"><span class="stat-number">5,343</span><span class="stat-label">Test functions across 399 test files, run in CI on Python 3.11, 3.12 and 3.13</span></div>
+        <div class="stat"><span class="stat-number">3,019</span><span class="stat-label">Knowledge-graph nodes grounding every model&rsquo;s citations</span></div>
         <div class="stat"><span class="stat-number">75 / 383s</span><span class="stat-label">Public datasets processed end to end, one benchmark run</span></div>
       </div>
       <p class="case-note">Kern is live and you can open it: <a href="https://linchpin.fly.dev">linchpin.fly.dev</a>. The repository is private.</p>
@@ -85,15 +112,23 @@ try {
 
   <section class="case-section">
     <div class="container">
-      <h2>How this compares</h2>
-      <p>Every model behind these 35+ tools has been checked against the shortcut most teams actually use instead &mdash; not just built, benchmarked.</p>
+      <h2>What it is not</h2>
+      <p>It is not an autonomous agent that picks and chains tools on its own. That is a choice, not a gap: a system that cannot say which tool produced a number should not be allowed to produce it.</p>
+      <p>And it has no external user yet. It is deployed and I can walk you through it; it has not run a client&rsquo;s operation.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>How the models behind it compare</h2>
+      <p>Each model behind the tools is checked against the shortcut most teams use instead.</p>
       <div class="stat-grid">
-        <div class="stat"><span class="stat-number">~19%</span><span class="stat-label">More accurate demand forecasts than naive persistence</span></div>
-        <div class="stat"><span class="stat-number">29%</span><span class="stat-label">More expensive to order in round lots instead of at the EOQ-optimal quantity</span></div>
-        <div class="stat"><span class="stat-number">79%</span><span class="stat-label">Real service level from the common "20% of demand" safety-stock rule (target: 95%)</span></div>
-        <div class="stat"><span class="stat-number">6.7%</span><span class="stat-label">Holding cost saved by pooling risk across a network instead of stacking it at one node</span></div>
+        <div class="stat"><span class="stat-number">~19%</span><span class="stat-label">More accurate than naive persistence on M5 held-out data</span></div>
+        <div class="stat"><span class="stat-number">29%</span><span class="stat-label">Cheaper per year than ordering in round lots</span></div>
+        <div class="stat"><span class="stat-number">79%</span><span class="stat-label">The real service level of the &ldquo;20% of demand&rdquo; rule, against a 95% target</span></div>
+        <div class="stat"><span class="stat-number">6.7%</span><span class="stat-label">Less holding cost from placing buffers across a chain instead of at one node</span></div>
       </div>
-      <p class="case-note">Full methodology and reproducible commands for all four: <a href="https://linchpin.fly.dev/how-it-works" target="_blank" rel="noopener">CASE_STUDIES.md</a>.</p>
+      <p class="case-note">Each number has its own page: <a href="demand-forecasting.html">forecasting</a>, <a href="safety-stock-eoq.html">safety stock and EOQ</a>, and the <a href="multi-echelon-network.html">network</a>.</p>
     </div>
   </section>
 
@@ -105,13 +140,13 @@ try {
         <li class="tag">FastAPI</li>
         <li class="tag">Knowledge-Graph Retrieval</li>
         <li class="tag">QA-Gated Pipeline Design</li>
-        <li class="tag">LLM-Assisted Routing (optional)</li>
+        <li class="tag">LLM-Assisted Routing (tiebreaker only)</li>
       </ul>
     </div>
   </section>
 
   <div class="container">
-    <a class="btn btn-primary" href="https://linchpin.fly.dev" target="_blank" rel="noopener">Open the live appsitory &rarr;</a>
+    <a class="btn btn-primary" href="https://linchpin.fly.dev" target="_blank" rel="noopener">Open the live app &rarr;</a>
   </div>
 </main>
 
