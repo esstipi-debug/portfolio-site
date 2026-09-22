@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multi-Echelon Network Optimization — Marcos Stipicich</title>
-<meta name="description" content="Case study: Guaranteed-Service Model optimization across a 3-stage supply chain.">
+<title>Where to hold safety stock in a multi-echelon supply chain — Marcos Stipicich</title>
+<meta name="description" content="Not at every stage. A buffer at each node covers the same variability two or three times. The Guaranteed-Service Model decides where it belongs.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232f5fb0'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='60' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="../assets/css/style.css">
 <script>
@@ -13,6 +13,37 @@ try {
   var t = localStorage.getItem('theme');
   if (t) document.documentElement.setAttribute('data-theme', t);
 } catch (e) {}
+</script>
+<link rel="canonical" href="https://marcos-stipicich.fly.dev/case-studies/multi-echelon-network.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Marcos Stipicich",
+  "jobTitle": "Inventory and supply chain specialist",
+  "url": "https://marcos-stipicich.fly.dev/",
+  "sameAs": [
+    "https://www.linkedin.com/in/marcos-stipicich",
+    "https://github.com/esstipi-debug",
+    "https://www.upwork.com/freelancers/~014166c91202da1f21"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Where should safety stock sit in a multi-stage supply chain?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not at every stage. A buffer at the supplier, another at the distribution centre and another at the store covers the same demand variability two or three times over. The Guaranteed-Service Model (Graves and Willems; Vandeput 2020, chapter 10) sets each stage’s service time so the whole chain holds the least stock that still meets the end-to-end service level. The usual result is large buffers at a few stages and none at the others."
+      }
+    }
+  ]
+}
 </script>
 </head>
 <body>
@@ -41,57 +72,48 @@ try {
   <header class="case-hero">
     <div class="container">
       <p class="case-kicker">Case Study &mdash; Network Design</p>
-      <h1>Multi-Echelon Network Optimization</h1>
-      <p class="case-summary">Where in a multi-stage supply chain should safety stock actually live? The Guaranteed-Service Model answers that with numbers, not intuition.</p>
+      <h1>Where should safety stock sit in a multi-stage supply chain?</h1>
+      <p class="case-summary">Not at every stage. A buffer at the supplier, another at the distribution centre and another at the store covers the same demand variability two or three times over. The Guaranteed-Service Model (Graves and Willems; Vandeput 2020, chapter 10) sets each stage’s service time so the whole chain holds the least stock that still meets the end-to-end service level. The usual result is large buffers at a few stages and none at the others.</p>
       <div class="case-image reveal">
         <img src="../assets/img/dashboard-portfolio.png" width="1380" height="860" alt="Portfolio dashboard showing inventory investment across a network of SKUs" loading="eager">
       </div>
     </div>
   </header>
 
-  <section class="case-section">
-    <div class="container">
-      <h2>Problem</h2>
-      <p>Positioning safety stock node by node in a multi-stage supply chain (supplier &rarr; distribution center &rarr; store) is a common but wasteful default. Holding a buffer at every stage double- and triple-covers the same variability. The real question is where in the chain to hold it.</p>
-    </div>
-  </section>
-
-  <section class="case-section">
-    <div class="container">
-      <h2>Method</h2>
-      <p>The Guaranteed-Service Model (GSM) &mdash; Vandeput (2020) Ch. 10, building on Graves &amp; Willems &mdash; computes each stage's optimal "net replenishment time" (its risk period) to minimize total holding cost across the chain while still meeting a target end-to-end service level.</p>
-    </div>
-  </section>
-
-  <section class="case-section">
-    <div class="container">
-      <h2>What I built</h2>
-      <p>I ran Kern's <code>multi_echelon</code> module on a 3-stage serial chain with stage lead times of 4, 3, and 2 days, demand of &mu;=100 / &sigma;=25 per period, review periods of 1, 2, and 4 days at each stage, and a 95% target service level.</p>
-    </div>
-  </section>
-
   <section class="case-result">
     <div class="container">
-      <h2>Result</h2>
+      <h2>Worked example</h2>
+      <p>A three-stage serial chain: supplier, distribution centre, store. Stage lead times of 4, 3 and 2 days. Demand of 100 units a day with a standard deviation of 25. Review periods of 1, 2 and 4 days. Target: 95% end to end.</p>
       <div class="stat-grid">
-        <div class="stat"><span class="stat-number">(4, 0, 6)</span><span class="stat-label">Optimal risk periods across the 3 stages</span></div>
+        <div class="stat"><span class="stat-number">(4, 0, 6)</span><span class="stat-label">Optimal risk periods across the three stages</span></div>
         <div class="stat"><span class="stat-number">&euro;485</span><span class="stat-label">Total holding cost at that configuration</span></div>
-        <div class="stat"><span class="stat-number">95%</span><span class="stat-label">End-to-end target service level held</span></div>
-        <div class="stat"><span class="stat-number">3</span><span class="stat-label">Supply-chain stages optimized jointly</span></div>
+        <div class="stat"><span class="stat-number">&euro;520</span><span class="stat-label">Holding cost with all safety stock at the customer-facing node</span></div>
+        <div class="stat"><span class="stat-number">6.7%</span><span class="stat-label">Less holding cost, at the same 95% end-to-end service level</span></div>
       </div>
-      <p class="case-note">Worked example reproduced from Kern's engine (<code>src/multi_echelon.py</code>).</p>
+      <p class="case-note">The middle stage holds no safety stock at all.</p>
     </div>
   </section>
 
   <section class="case-section">
     <div class="container">
-      <h2>How this compares</h2>
-      <p>The common default &mdash; holding safety stock only at the node closest to the customer, with no risk-pooling across the chain &mdash; already has a real, measurable cost in this exact scenario.</p>
-      <div class="stat-grid">
-        <div class="stat"><span class="stat-number">&euro;520</span><span class="stat-label">Holding cost with no risk-pooling (all safety stock at the customer-facing node)</span></div>
-        <div class="stat"><span class="stat-number">6.7%</span><span class="stat-label">Cost reduction from GSM-optimized placement (the &euro;485 result above)</span></div>
-      </div>
-      <p class="case-note">Pinned by a test in Kern&rsquo;s own suite (<code>test_gsm_case4_all_downstream_cost</code>), not a hypothetical.</p>
+      <h2>The honest reading of that number</h2>
+      <p>6.7% on a three-stage textbook chain is not a headline, and I would not quote it to you as a saving. The point of the example is the zero in the middle: the optimiser removed an entire stage&rsquo;s buffer. On a real network with more stages and more nodes, that structural result is where the money is. What it is worth on yours is something I would measure, not promise.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>Where this doesn&rsquo;t work</h2>
+      <strong>Perishable goods.</strong> Moving a buffer upstream to save holding cost can mean stock that ages before it reaches the shelf. The engine refuses to run buffer sizing for a food client without shelf life in the model, and asks for it instead &mdash; because buffer sizing with no notion of shelf life turns capital into spoilage.
+      <strong>Stages that miss their promised service time.</strong> The model assumes each stage keeps the service time it quotes. If the distribution centre routinely runs late, the stage the model left without a buffer becomes the one that stocks out.
+      <strong>Distribution networks.</strong> One warehouse feeding many stores needs the tree version of the model, not the serial one shown here.
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>How it&rsquo;s built</h2>
+      <p>Kern&rsquo;s <code>multi_echelon</code> module, Guaranteed-Service Model on a serial chain. The figures above are pinned by a test in Kern&rsquo;s own suite (<code>test_gsm_case4_all_downstream_cost</code>).</p>
     </div>
   </section>
 
@@ -108,7 +130,7 @@ try {
   </section>
 
   <div class="container">
-    <a class="btn btn-primary" href="../index.html#contact">Discuss a project like this &rarr;</a>
+    <a class="btn btn-primary" href="../index.html#contact">Talk about your network &rarr;</a>
   </div>
 </main>
 

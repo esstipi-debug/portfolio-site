@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demand Forecasting &amp; Segmentation at Scale — Marcos Stipicich</title>
-<meta name="description" content="Case study: classifying and forecasting 34,498 SKUs across 75 public retail datasets end to end with Kern.">
+<title>How to forecast SKUs with intermittent demand — Marcos Stipicich</title>
+<meta name="description" content="Classify each SKU before forecasting it. Send intermittent SKUs to Croston&#x27;s method, and measure every forecast against naive persistence.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232f5fb0'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='60' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="../assets/css/style.css">
 <script>
@@ -13,6 +13,37 @@ try {
   var t = localStorage.getItem('theme');
   if (t) document.documentElement.setAttribute('data-theme', t);
 } catch (e) {}
+</script>
+<link rel="canonical" href="https://marcos-stipicich.fly.dev/case-studies/demand-forecasting.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Marcos Stipicich",
+  "jobTitle": "Inventory and supply chain specialist",
+  "url": "https://marcos-stipicich.fly.dev/",
+  "sameAs": [
+    "https://www.linkedin.com/in/marcos-stipicich",
+    "https://github.com/esstipi-debug",
+    "https://www.upwork.com/freelancers/~014166c91202da1f21"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do you forecast SKUs with intermittent demand?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Classify before you forecast. Segment the catalogue by value (ABC) and by demand variability (XYZ), send intermittent SKUs — long runs of zero with the occasional order — to Croston’s method instead of a moving average, and measure the result against naive persistence: last period’s value carried forward. If a forecast can’t beat that, it isn’t one."
+      }
+    }
+  ]
+}
 </script>
 </head>
 <body>
@@ -41,8 +72,8 @@ try {
   <header class="case-hero">
     <div class="container">
       <p class="case-kicker">Case Study &mdash; Forecasting</p>
-      <h1>Demand Forecasting &amp; Segmentation at Scale</h1>
-      <p class="case-summary">Classifying and forecasting 34,498 SKUs across 75 public retail datasets, end to end, with no manual per-SKU tuning.</p>
+      <h1>How do you forecast SKUs with intermittent demand?</h1>
+      <p class="case-summary">Classify before you forecast. Segment the catalogue by value (ABC) and by demand variability (XYZ), send intermittent SKUs — long runs of zero with the occasional order — to Croston’s method instead of a moving average, and measure the result against naive persistence: last period’s value carried forward. If a forecast can’t beat that, it isn’t one.</p>
       <div class="case-image reveal">
         <img src="../assets/img/dashboard-forecast.png" width="1380" height="860" alt="Forecast dashboard showing demand curves against policy levels" loading="eager">
       </div>
@@ -51,47 +82,49 @@ try {
 
   <section class="case-section">
     <div class="container">
-      <h2>Problem</h2>
-      <p>Most retail and CPG SKUs don't have smooth, predictable demand. A large share of them are intermittent &mdash; long stretches of zero demand punctuated by occasional orders &mdash; which breaks naive forecasting methods like simple moving averages or plain exponential smoothing. Forecast the wrong way and every downstream decision (safety stock, reorder points, purchasing) inherits the error.</p>
-    </div>
-  </section>
-
-  <section class="case-section">
-    <div class="container">
-      <h2>Method</h2>
-      <p>Before forecasting a single SKU, classify it. Kern's engine runs ABC-XYZ segmentation to separate steady, high-volume SKUs from volatile or intermittent ones, then routes intermittent SKUs to Croston's method instead of a generic smoothing model &mdash; the demand-classification approach laid out in Vandeput (2020), Ch. 9.</p>
-    </div>
-  </section>
-
-  <section class="case-section">
-    <div class="container">
-      <h2>What I built</h2>
-      <p>I ran Kern's full <code>classify &rarr; forecast &rarr; inventory-policy</code> pipeline end to end against 75 public retail datasets &mdash; the M5 Forecasting competition (split by store and department), the UCI Online Retail dataset, and the Kaggle Superstore dataset &mdash; through the same agent pipeline used for every other capability, with no manual per-SKU tuning.</p>
+      <h2>Why it matters</h2>
+      <p>A moving average on an intermittent SKU spreads the zeros into a small positive number every period. It under-forecasts the order when it arrives and holds stock in between. Every number downstream &mdash; safety stock, reorder point, the purchase order &mdash; inherits that error.</p>
     </div>
   </section>
 
   <section class="case-result">
     <div class="container">
-      <h2>Result</h2>
+      <h2>The evidence</h2>
       <div class="stat-grid">
-        <div class="stat"><span class="stat-number">75</span><span class="stat-label">Public datasets processed</span></div>
-        <div class="stat"><span class="stat-number">34,498</span><span class="stat-label">SKUs classified &amp; forecast</span></div>
-        <div class="stat"><span class="stat-number">3</span><span class="stat-label">Public data sources: M5, UCI Online Retail, Superstore</span></div>
-        <div class="stat"><span class="stat-number">383s</span><span class="stat-label">Total end-to-end runtime</span></div>
+        <div class="stat"><span class="stat-number">~19%</span><span class="stat-label">Lower forecast error than naive persistence (MAE and demand-weighted WAPE), 100 M5 SKUs, held-out actuals</span></div>
+        <div class="stat"><span class="stat-number">99/100</span><span class="stat-label">Sampled SKUs classified as intermittent and routed to Croston&rsquo;s method</span></div>
       </div>
-      <p class="case-note">Run against public benchmark datasets (M5 / UCI Online Retail / Superstore) via Kern's own portfolio benchmark script &mdash; not client data. The dataset-by-dataset breakdown is available on request; the repository is private.</p>
+      <p class="case-note">On one metric naive wins: unweighted per-SKU average WAPE, by 3.2 points. That is a known artifact of the metric on intermittent demand &mdash; an SKU that sells 2 units weighs the same as one that sells 2,000, and percentage errors blow up near zero. It is why the M5 competition itself does not score on plain per-series WAPE. Report both, and say which one you are optimising.</p>
     </div>
   </section>
 
   <section class="case-section">
     <div class="container">
-      <h2>How this compares</h2>
-      <p>Backtested against real M5 competition data (100 SKUs, genuine held-out actuals): Kern's classification-routed forecast is about 19% more accurate than naive last-value persistence &mdash; the default most planners fall back to in a spreadsheet.</p>
+      <h2>At scale</h2>
+      <p>The same classify &rarr; forecast &rarr; inventory-policy pipeline ran end to end across 75 public retail datasets &mdash; M5 by store and department, UCI Online Retail and Kaggle Superstore. Public data, not client data.</p>
       <div class="stat-grid">
-        <div class="stat"><span class="stat-number">~19%</span><span class="stat-label">Lower forecast error vs. naive persistence (MAE and demand-weighted WAPE)</span></div>
-        <div class="stat"><span class="stat-number">99/100</span><span class="stat-label">Sampled SKUs classified as intermittent and routed to Croston's method</span></div>
+        <div class="stat"><span class="stat-number">75</span><span class="stat-label">Public retail datasets</span></div>
+        <div class="stat"><span class="stat-number">34,498</span><span class="stat-label">SKUs classified &amp; forecast</span></div>
+        <div class="stat"><span class="stat-number">3</span><span class="stat-label">Public data sources: M5, UCI Online Retail, Superstore</span></div>
+        <div class="stat"><span class="stat-number">383s</span><span class="stat-label">Total end-to-end runtime, no per-SKU tuning</span></div>
       </div>
-      <p class="case-note">On one specific metric &mdash; the unweighted per-SKU-average WAPE &mdash; naive edges out Kern by 3.2 points, a known artifact of that metric on intermittent demand (it's why the real M5 competition itself doesn't score on plain per-series WAPE). Both metrics, SKU by SKU, are available on request.</p>
+      <p class="case-note">The dataset-by-dataset breakdown is available on request; the repository is private.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>Where this doesn&rsquo;t work</h2>
+      <strong>New SKUs with no history.</strong> There is nothing to classify. Forecast from a comparable SKU or from the launch plan, and switch once a few months of sales exist.
+      <strong>Demand driven by a handful of large customers.</strong> Croston treats order size as noise. If three accounts drive the volume, their order calendar beats any model.
+      <strong>Histories with stockouts and promotions left in.</strong> A stockout period recorded as zero sales teaches the model that demand fell, and it will underbuy the exact SKUs that keep running out. Clean the history before you trust any method on it.
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <h2>How it&rsquo;s built</h2>
+      <p>Kern&rsquo;s forecasting engine, in Python and pandas: ABC-XYZ segmentation, Croston for intermittent series, following Vandeput (2020), chapter 9. Routing between methods is deterministic.</p>
     </div>
   </section>
 
@@ -102,14 +135,14 @@ try {
         <li class="tag">Python</li>
         <li class="tag">Pandas</li>
         <li class="tag">ABC-XYZ Segmentation</li>
-        <li class="tag">Croston's Method</li>
+        <li class="tag">Croston&rsquo;s Method</li>
         <li class="tag">Kern Forecasting Engine</li>
       </ul>
     </div>
   </section>
 
   <div class="container">
-    <a class="btn btn-primary" href="../index.html#contact">Discuss a project like this &rarr;</a>
+    <a class="btn btn-primary" href="../index.html#contact">Talk about your forecast &rarr;</a>
   </div>
 </main>
 

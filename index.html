@@ -14,6 +14,21 @@ try {
   if (t) document.documentElement.setAttribute('data-theme', t);
 } catch (e) {}
 </script>
+<link rel="canonical" href="https://marcos-stipicich.fly.dev/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Marcos Stipicich",
+  "jobTitle": "Inventory and supply chain specialist",
+  "url": "https://marcos-stipicich.fly.dev/",
+  "sameAs": [
+    "https://www.linkedin.com/in/marcos-stipicich",
+    "https://github.com/esstipi-debug",
+    "https://www.upwork.com/freelancers/~014166c91202da1f21"
+  ]
+}
+</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -94,14 +109,14 @@ try {
     <div class="container">
       <p class="section-kicker">Case Studies</p>
       <h2 class="section-title reveal">Five ways the models pay off</h2>
-      <p class="section-lede reveal">Every number below is a real, reproducible output &mdash; a worked textbook example or a run against public benchmark data &mdash; not a client testimonial.</p>
+      <p class="section-lede reveal">Each page answers one question, with the arithmetic shown. Every number is a real output &mdash; a worked textbook example or a run against public benchmark data &mdash; not a client testimonial.</p>
       <div class="case-study-grid">
         <a class="case-study-card reveal" href="case-studies/demand-forecasting.html">
           <img src="assets/img/dashboard-forecast.png" width="1380" height="860" alt="Forecast dashboard showing demand curves against policy levels" loading="lazy">
           <div class="case-study-card-body">
             <p class="case-study-card-kicker">Forecasting</p>
-            <h3>Demand Forecasting &amp; Segmentation at Scale</h3>
-            <p>Classifying and forecasting 34,498 SKUs across 75 public retail datasets, end to end.</p>
+            <h3>How do you forecast SKUs with intermittent demand?</h3>
+            <p>Classify first, route intermittent SKUs to Croston, and beat naive persistence &mdash; about 19% on M5 held-out data.</p>
             <span class="card-link">Read the case study &rarr;</span>
           </div>
         </a>
@@ -109,8 +124,8 @@ try {
           <img src="assets/img/dashboard-detail.png" width="1380" height="860" alt="Detail dashboard showing SKU-level inventory policy parameters" loading="lazy">
           <div class="case-study-card-body">
             <p class="case-study-card-kicker">Safety Stock &amp; EOQ</p>
-            <h3>Right-Sizing Safety Stock, Reorder Points &amp; Order Quantities</h3>
-            <p>Textbook-grounded EOQ and safety-stock models, worked end to end from raw demand statistics.</p>
+            <h3>How do you calculate safety stock, reorder point and EOQ?</h3>
+            <p>z &times; &sigma; over the lead time, not a percentage of demand: the 20% rule delivers 79% service against a 95% target.</p>
             <span class="card-link">Read the case study &rarr;</span>
           </div>
         </a>
@@ -118,17 +133,17 @@ try {
           <img src="assets/img/dashboard-portfolio.png" width="1380" height="860" alt="Portfolio dashboard showing inventory investment across a network of SKUs" loading="lazy">
           <div class="case-study-card-body">
             <p class="case-study-card-kicker">Network Design</p>
-            <h3>Multi-Echelon Network Optimization</h3>
-            <p>Guaranteed-service modeling across a 3-stage supply chain to place safety stock where it's cheapest.</p>
+            <h3>Where should safety stock sit in a multi-stage supply chain?</h3>
+            <p>Not at every stage. On a three-stage chain the optimiser removed the middle stage&rsquo;s buffer entirely.</p>
             <span class="card-link">Read the case study &rarr;</span>
           </div>
         </a>
         <a class="case-study-card reveal" href="case-studies/ai-decision-agent.html">
           <img src="assets/img/scm-agent-console.png" width="1240" height="680" alt="Kern agent console routing a brief to a supply chain capability" loading="lazy">
           <div class="case-study-card-body">
-            <p class="case-study-card-kicker">AI Agent</p>
-            <h3>Building an AI Agent for Supply-Chain Decisions</h3>
-            <p>Why I didn't stop at spreadsheets: a QA-gated pipeline that runs 50 supply-chain tools end to end, with every number computed rather than generated.</p>
+            <p class="case-study-card-kicker">AI &amp; Decisions</p>
+            <h3>What should an AI be allowed to decide in inventory planning?</h3>
+            <p>Not the numbers. The model breaks routing ties; every quantity comes from deterministic code, checked before it ships.</p>
             <span class="card-link">Read the case study &rarr;</span>
           </div>
         </a>
@@ -136,8 +151,8 @@ try {
           <img src="assets/img/dashboard-budget.png" width="1380" height="860" alt="Kern budget dashboard — the kind of engine output this capability is designed to make audit-defensible" loading="lazy">
           <div class="case-study-card-body">
             <p class="case-study-card-kicker">Audit Evidence &middot; In Development</p>
-            <h3>Turning Inventory Analytics into Audit-Defensible Evidence</h3>
-            <p>Researching PCAOB/AICPA standards first, then building statistical sampling and lineage that a reviewer can re-derive, not just trust.</p>
+            <h3>How many inventory items should an audit sample test?</h3>
+            <p>29 items at a 10% tolerable rate, 59 at 5% &mdash; computed in closed form, with a record a reviewer can re-perform.</p>
             <span class="card-link">Read the case study &rarr;</span>
           </div>
         </a>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Turning Inventory Analytics into Audit-Defensible Evidence — Marcos Stipicich</title>
-<meta name="description" content="Case study: researching PCAOB/AICPA audit standards before writing code, and what a machine-verified, re-performable audit workpaper actually requires.">
+<title>How many inventory items should an audit sample test? — Marcos Stipicich</title>
+<meta name="description" content="At 95% confidence with no expected deviations: 29 items for a 10% tolerable rate, 59 for 5%. Computed in closed form, with a record anyone can re-perform.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232f5fb0'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='60' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="../assets/css/style.css">
 <script>
@@ -13,6 +13,37 @@ try {
   var t = localStorage.getItem('theme');
   if (t) document.documentElement.setAttribute('data-theme', t);
 } catch (e) {}
+</script>
+<link rel="canonical" href="https://marcos-stipicich.fly.dev/case-studies/audit-evidence.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Marcos Stipicich",
+  "jobTitle": "Inventory and supply chain specialist",
+  "url": "https://marcos-stipicich.fly.dev/",
+  "sameAs": [
+    "https://www.linkedin.com/in/marcos-stipicich",
+    "https://github.com/esstipi-debug",
+    "https://www.upwork.com/freelancers/~014166c91202da1f21"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How many inventory items should an audit sample test?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the test, and it should never be picked by feel. For a test of controls at 95% confidence with no expected deviations, the attribute sample is 29 items at a 10% tolerable deviation rate and 59 at 5%. For testing a balance, Monetary Unit Sampling uses a reliability factor of 3.00 at 5% risk with no expected misstatement, which sets the sampling interval at tolerable misstatement divided by 3. What the standards require is not a particular table, but a sample you can defend and re-perform."
+      }
+    }
+  ]
+}
 </script>
 </head>
 <body>
@@ -41,45 +72,52 @@ try {
   <header class="case-hero">
     <div class="container">
       <p class="case-kicker">Case Study &mdash; Audit Evidence</p>
-      <h1>Turning Inventory Analytics into Audit-Defensible Evidence</h1>
-      <p class="case-summary">Why I researched PCAOB and AICPA standards before writing a line of code &mdash; and what a machine-verified, re-performable audit workpaper actually requires.</p>
+      <h1>How many inventory items should an audit sample test?</h1>
+      <p class="case-summary">It depends on the test, and it should never be picked by feel. For a test of controls at 95% confidence with no expected deviations, the attribute sample is 29 items at a 10% tolerable deviation rate and 59 at 5%. For testing a balance, Monetary Unit Sampling uses a reliability factor of 3.00 at 5% risk with no expected misstatement, which sets the sampling interval at tolerable misstatement divided by 3. What the standards require is not a particular table, but a sample you can defend and re-perform.</p>
       <div class="case-image reveal">
         <img src="../assets/img/dashboard-budget.png" width="1380" height="860" alt="Kern budget dashboard — the kind of engine output this capability is designed to make audit-defensible" loading="eager">
       </div>
     </div>
   </header>
 
-  <section class="case-section">
+  <section class="case-result">
     <div class="container">
-      <h2>Problem</h2>
-      <p>Much inventory audit evidence still gets prepared by hand in Excel &mdash; a sample size picked "by feel," no re-performable record of which items were tested or why. A regulatory change makes that riskier: the PCAOB has amended AS 1215 to cut the window for assembling final audit documentation from 45 days to 14, and <a href="https://pcaobus.org/oversight/standards/auditing-standards/details/as-1215--audit-documentation-(effective-on-12-15-2026)" target="_blank" rel="noopener">lists the amended standard as effective from 15 December 2026</a> &mdash; whatever gets prepared has to be final-form fast.</p>
+      <h2>Worked example</h2>
+      <p>An inventory balance of $2,000,000. Tolerable misstatement of $100,000. No misstatement expected. 5% risk of incorrect acceptance, so a reliability factor of 3.00.</p>
+      <div class="stat-grid">
+        <div class="stat"><span class="stat-number">3.00</span><span class="stat-label">MUS reliability factor at 5% risk, no expected misstatement</span></div>
+        <div class="stat"><span class="stat-number">$33,333</span><span class="stat-label">Sampling interval: $100,000 tolerable misstatement / 3.00</span></div>
+        <div class="stat"><span class="stat-number">60</span><span class="stat-label">Items to test in a $2,000,000 inventory balance</span></div>
+        <div class="stat"><span class="stat-number">29 / 59</span><span class="stat-label">Attribute sample sizes at 95% confidence, 10% / 5% tolerable deviation rate</span></div>
+      </div>
+      <p class="case-note">Sampling interval = 100,000 / 3.00 = $33,333. Sample size = 2,000,000 / 33,333 = 60 items. Every dollar in the balance has the same chance of selection, so the large items are tested almost by construction.</p>
     </div>
   </section>
 
   <section class="case-section">
     <div class="container">
-      <h2>Method</h2>
-      <p>Before designing anything, I researched the actual standards: AU-C 530 / AS 2315 (audit sampling), AS 1105 (evidence sufficiency and reliability), and AS 1215 (documentation and re-performability). The key finding: neither standard mandates a specific statistical table &mdash; what's mandated is representative sample design, projection of misstatements to the population, and investigation of every exception found. The specific AICPA table values are customary, not required, which is exactly why an engine should implement them precisely and cite them by table number rather than approximate them. The evidence/lineage design reuses Kern's existing writeback-safety pattern (hash-verified, timestamped records) as its closest precedent &mdash; the same shape, applied to a read/analysis path instead of a system-of-record mutation.</p>
+      <h2>What the standards actually say</h2>
+      <p>AU-C 530 and AS 2315 cover audit sampling; AS 1105 covers the sufficiency and reliability of evidence; AS 1215 covers documentation and re-performability. None of them mandates a specific statistical table. What they require is a representative sample design, projection of misstatements to the population, and investigation of every exception found.</p>
+      <p>The AICPA table values are customary, not required &mdash; which is exactly why an engine should compute them precisely and cite them by table, rather than approximate them.</p>
+      <p>The timing matters too. The PCAOB has amended AS 1215 to cut the window for assembling final audit documentation from 45 days to 14, and <a href="https://pcaobus.org/oversight/standards/auditing-standards/details/as-1215--audit-documentation-(effective-on-12-15-2026)" target="_blank" rel="noopener">lists the amended standard as effective from 15 December 2026</a>. Evidence has to be final-form fast.</p>
     </div>
   </section>
 
   <section class="case-section">
     <div class="container">
       <h2>What I built</h2>
-      <p><code>src/audit_evidence.py</code>: closed-form attribute sampling (binomial, for tests of controls) and Monetary Unit Sampling (Poisson-gamma reliability factors, for substantive testing of account balances), a GL/trial-balance tie-out with reconciling-item classification, and an evidence record &mdash; SHA-256 input hashing, the exact parameters used, a formula-version identifier, and a positive QA attestation &mdash; so an independent reviewer can re-derive every number on the workpaper, not just trust it.</p>
+      <p>A module for closed-form attribute sampling (binomial, for tests of controls) and Monetary Unit Sampling (Poisson-gamma reliability factors, for balances); a general ledger and trial balance tie-out that classifies reconciling items; and an evidence record for every run &mdash; a SHA-256 hash of the inputs, the exact parameters, a formula-version identifier and a QA attestation &mdash; so an independent reviewer can re-derive every number on the workpaper instead of trusting it.</p>
+      <p>Thirty automated tests, each pinned to a published reference value.</p>
+      <p class="case-note">Status: the engine core above is built and tested. Wiring it into the same pipeline as the other tools, so it runs end to end like the rest of Kern, is in progress.</p>
     </div>
   </section>
 
-  <section class="case-result">
+  <section class="case-section">
     <div class="container">
-      <h2>Result</h2>
-      <div class="stat-grid">
-        <div class="stat"><span class="stat-number">30</span><span class="stat-label">Automated tests, each pinned against a published reference number</span></div>
-        <div class="stat"><span class="stat-number">3.00</span><span class="stat-label">MUS zero-error reliability factor at 5% risk &mdash; matches the standard AICPA table value</span></div>
-        <div class="stat"><span class="stat-number">29 / 59</span><span class="stat-label">Attribute sample sizes at 95% confidence, 10%/5% tolerable deviation rate &mdash; classic textbook values, reproduced in closed form</span></div>
-        <div class="stat"><span class="stat-number">Never executed</span><span class="stat-label">Every result ends in a handoff or an escalation &mdash; the engine prepares evidence, the auditor of record still concludes and signs</span></div>
-      </div>
-      <p class="case-note">Status: the engine core above is built and tested. Wiring it into the same agent pipeline as the other tools &mdash; so it runs end to end like the rest of Kern &mdash; is in progress. Full status, file by file: an open pull request in the private repository.</p>
+      <h2>Where this doesn&rsquo;t work</h2>
+      <strong>Sample size is not the judgment.</strong> The engine computes the sample and records it. The auditor of record still sets tolerable misstatement and risk, investigates the exceptions, and signs. It prepares evidence; it never concludes.
+      <strong>Expected deviations above zero change the answer quickly.</strong> The sizes above assume none; allow for even one and the sample grows.
+      <strong>A bad count is not a sampling problem.</strong> Where the physical count itself is unreliable, a larger sample of a bad count is still a bad count. Fix the count first &mdash; cycle counting and inventory accuracy are an operations problem before they are an audit one.
     </div>
   </section>
 
@@ -94,6 +132,10 @@ try {
       </ul>
     </div>
   </section>
+
+  <div class="container">
+    <a class="btn btn-primary" href="../index.html#contact">Talk about audit evidence &rarr;</a>
+  </div>
 </main>
 
 <footer class="site-footer">
